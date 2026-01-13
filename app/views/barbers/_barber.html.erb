@@ -14,4 +14,5 @@
     <%= barber.barber_shop_id %>
   </p>
 
+  <%= render "schedules/weekly_schedule", weekly_schedule: barber.schedules.grouped_by_weekday %>
 </div>

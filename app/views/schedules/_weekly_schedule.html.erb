@@ -1,0 +1,18 @@
+<div class="row g-3">
+  <% weekly_schedule.each do |weekday, schedules| %>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100">
+        <div class="card-header fw-bold"><%= Weekdays.key_for weekday %></div>
+
+        <div class="card-body">
+          <% schedules.each do |schedule| %>
+            <p class="mb-1">
+              <%= schedule.start_time.strftime("%H:%M") %> - 
+              <%= schedule.end_time.strftime("%H:%M") %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

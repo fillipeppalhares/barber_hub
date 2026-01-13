@@ -4,6 +4,7 @@
 
 <div>
   <%= link_to "Edit this barber", edit_barber_path(@barber) %> |
+  <%= link_to "Edit weekly schedule", edit_weekly_schedule_barber_path(@barber) %> |
   <%= link_to "Back to barbers", barbers_path %>
 
   <%= button_to "Destroy this barber", @barber, method: :delete %>

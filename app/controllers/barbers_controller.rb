@@ -1,25 +1,20 @@
 class BarbersController < ApplicationController
-  before_action :set_barber, only: %i[ show edit update destroy ]
+  before_action :set_barber, only: %i[show edit update destroy edit_weekly_schedule update_weekly_schedule]
 
-  # GET /barbers or /barbers.json
   def index
     @barbers = Barber.all
   end
 
-  # GET /barbers/1 or /barbers/1.json
   def show
   end
 
-  # GET /barbers/new
   def new
     @barber = Barber.new
   end
 
-  # GET /barbers/1/edit
   def edit
   end
 
-  # POST /barbers or /barbers.json
   def create
     @barber = Barber.new(barber_params)
 
@@ -34,7 +29,6 @@ class BarbersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /barbers/1 or /barbers/1.json
   def update
     respond_to do |format|
       if @barber.update(barber_params)
@@ -47,7 +41,6 @@ class BarbersController < ApplicationController
     end
   end
 
-  # DELETE /barbers/1 or /barbers/1.json
   def destroy
     @barber.destroy!
 
@@ -57,14 +50,33 @@ class BarbersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_barber
-      @barber = Barber.find(params.expect(:id))
-    end
+  def edit_weekly_schedule
+    @weekly_schedule = @barber.schedules.grouped_by_weekday
+  end
 
-    # Only allow a list of trusted parameters through.
-    def barber_params
-      params.expect(barber: [ :name, :active, :barber_shop_id ])
+  def update_weekly_schedule
+    respond_to do |format|
+      if @barber.update(weekly_schedule_params)
+        format.html { redirect_to @barber, notice: "Weekly Schedule was successfully updated.", status: :see_other }
+        format.json { render :show, status: :ok, location: @barber }
+      else
+        format.html { render :edit_weekly_schedule, status: :unprocessable_entity }
+        format.json { render json: @barber.errors, status: :unprocessable_entity }
+      end
     end
+  end
+
+  private
+
+  def set_barber
+    @barber = Barber.find(params.expect(:id))
+  end
+
+  def barber_params
+    params.expect(barber: [ :name, :active, :barber_shop_id ])
+  end
+
+  def weekly_schedule_params
+    params.require(:barber).permit(schedules_attributes: %i[id start_time end_time])
+  end
 end
