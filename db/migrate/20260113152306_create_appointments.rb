@@ -4,8 +4,8 @@ class CreateAppointments < ActiveRecord::Migration[8.0]
       t.references :barber, null: false, foreign_key: true
       t.references :service, null: false, foreign_key: true
       t.string :customer_name
-      t.datetime :start_time
-      t.datetime :end_time
+      t.time :start_time
+      t.time :end_time
       t.integer :status
 
       t.timestamps
