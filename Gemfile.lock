@@ -117,6 +117,8 @@ GEM
     dotenv (3.2.0)
     drb (2.2.3)
     ed25519 (1.4.0)
+    enumerate_it (4.1.0)
+      activesupport (>= 6.0.0)
     erb (6.0.1)
     erubi (1.13.1)
     et-orbi (1.4.0)
@@ -399,6 +401,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  enumerate_it
   jbuilder
   jsbundling-rails
   kamal
