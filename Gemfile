@@ -18,6 +18,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "acts_as_tenant"
 gem "devise"
+gem "simple_form"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
