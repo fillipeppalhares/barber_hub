@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @barber_shop %>
+
+<div>
+  <%= link_to "Edit this barber shop", edit_barber_shop_path(@barber_shop) %> |
+  <%= link_to "Back to barber shops", barber_shops_path %>
+
+  <%= button_to "Destroy this barber shop", @barber_shop, method: :delete %>
+</div>

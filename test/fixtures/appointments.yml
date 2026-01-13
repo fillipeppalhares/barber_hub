@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  barber: one
+  service: one
+  customer_name: MyString
+  start_time: 2026-01-13 12:23:06
+  end_time: 2026-01-13 12:23:06
+  status: 1
+
+two:
+  barber: two
+  service: two
+  customer_name: MyString
+  start_time: 2026-01-13 12:23:06
+  end_time: 2026-01-13 12:23:06
+  status: 1

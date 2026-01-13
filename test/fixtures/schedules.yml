@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  weekday: 1
+  start_time: 2026-01-13 12:23:00
+  end_time: 2026-01-13 12:23:00
+  barber: one
+
+two:
+  weekday: 1
+  start_time: 2026-01-13 12:23:00
+  end_time: 2026-01-13 12:23:00
+  barber: two
