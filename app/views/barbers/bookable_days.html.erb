@@ -1,0 +1,20 @@
+<% service_id = @service.id %>
+
+<div class="container pt-3">
+  <div class="d-flex justify-content-between mb-4">
+    <%= link_to "current month", bookable_days_barber_path(period: :current_month, service_id:), class: "btn btn-primary", data: { turbo_frame: :bookable_days } %>
+    <%= link_to "current week", bookable_days_barber_path(period: :current_week, service_id:), class: "btn btn-primary", data: { turbo_frame: :bookable_days } %>
+    <%= link_to "next month", bookable_days_barber_path(period: :next_month, service_id:), class: "btn btn-primary", data: { turbo_frame: :bookable_days } %>
+    <%= link_to "next week", bookable_days_barber_path(period: :next_week, service_id:), class: "btn btn-primary", data: { turbo_frame: :bookable_days } %>
+    <%= link_to "current and next month", bookable_days_barber_path(period: :current_and_next_month, service_id:), class: "btn btn-primary", data: { turbo_frame: :bookable_days } %>
+  </div>
+
+  <%= turbo_frame_tag :bookable_days do %>
+    <div class="row border rounded p-2 g-3">
+      <% @period.range.each do |day| %>
+        <% available = @bookable_days.include?(day) %>
+        <%= render "availability/day", day:, service_id:, available: %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

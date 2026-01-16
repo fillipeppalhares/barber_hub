@@ -1,4 +1,4 @@
-class AvailableSlots
+class Availability::Agenda::Gaps
   attr_accessor :barber, :day, :gaps
   private       :barber=, :day=, :gaps=
 
@@ -13,7 +13,7 @@ class AvailableSlots
   end
 
   def call
-    schedules = barber.schedules.where(weekday: day.wday)
+    schedules = barber.schedules_on(day)
     appointments = day_appointments
 
     schedules.each do |schedule|

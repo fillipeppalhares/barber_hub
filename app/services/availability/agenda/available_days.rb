@@ -1,4 +1,4 @@
-class AvailableDays
+class Availability::Agenda::AvailableDays
   attr_accessor :barber, :period
   private       :barber=, :period=
 
@@ -13,7 +13,7 @@ class AvailableDays
 
   def call
     period.range.select do |day|
-      day >= Date.current && AvailableSlots.call(barber:, day:).any?
+      day >= Date.current && Availability::Agenda::Gaps.call(barber:, day:).any?
     end
   end
 end

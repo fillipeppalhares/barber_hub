@@ -1,0 +1,13 @@
+<div class="col-12 col-md-6 col-lg-4">
+  <div class="card h-100 border-success">
+    <div class="card-body">
+      <h5 class="card-title"><%= slot.strftime("%H:%M") %></h5>
+
+      <%= render "appointments/form", request: AppointmentRequest.new(barber_id: @barber.id,
+                                                                      service_id: @service.id,
+                                                                      customer_name: "Eu",
+                                                                      start_at: slot,
+                                                                      end_at: slot + @service.duration.minutes) %>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class BarbersController < ApplicationController
-  before_action :set_barber, only: %i[show edit update destroy edit_weekly_schedule update_weekly_schedule available_days available_slots]
+  before_action :set_barber, only: %i[show edit update destroy edit_weekly_schedule update_weekly_schedule bookable_days bookable_slots]
 
   def index
     @barbers = Barber.all
@@ -66,12 +66,17 @@ class BarbersController < ApplicationController
     end
   end
 
-  def available_days
+  def bookable_days
+    @service = set_service
     @period = Period.from_param(params[:period])
-    @available_days = @barber.available_days(period: @period)
+    @bookable_days = @barber.bookable_days(period: @period, duration: @service.duration)
   end
 
-  def available_slots
+  def bookable_slots
+    day = DateTime.parse(params[:day])
+    @service = set_service
+    # @schedule = @barber.schedules_on(params[:day])
+    @bookable_slots = @barber.bookable_slots(day:, duration: @service.duration)
   end
 
   private
@@ -80,8 +85,12 @@ class BarbersController < ApplicationController
     @barber = Barber.find(params.expect(:id))
   end
 
+  def set_service
+    Service.find(params[:service_id])
+  end
+
   def barber_params
-    params.expect(barber: [ :name, :active, :barber_shop_id ])
+    params.expect(barber: [:name, :active, :barber_shop_id])
   end
 
   def weekly_schedule_params

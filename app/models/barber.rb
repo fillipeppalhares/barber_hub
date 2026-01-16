@@ -7,12 +7,24 @@ class Barber < ApplicationRecord
 
   after_create_commit :build_weekly_schedule
 
-  def available_days(period: Period.current_month)
-    AvailableDays.call(barber: self, period:)
+  def schedules_on(day)
+    schedules.where(weekday: day.wday)
   end
 
-  def available_slots(day:)
-    AvailableSlots.call(barber: self, day:)
+  def gaps(day:)
+    Availability::Agenda::Gaps.call(barber: self, day:)
+  end
+
+  def free_days(period:)
+    Availability::Agenda::AvailableDays.call(barber: self, period:)
+  end
+
+  def bookable_days(period: Period.current_month, duration:)
+    Availability::Booking::AvailableDays.call(barber: self, period:, duration:)
+  end
+
+  def bookable_slots(day:, duration:)
+    Availability::Booking::AvailableSlots.call(barber: self, day:, duration:)
   end
 
   private

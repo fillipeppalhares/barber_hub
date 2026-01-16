@@ -1,0 +1,7 @@
+<div class="container pt-3">
+  <div class="row border rounded p-2 g-3">
+    <% @bookable_slots.each do |slot| %>
+      <%= render "availability/slot", slot: %>
+    <% end %>
+  </div>
+</div>

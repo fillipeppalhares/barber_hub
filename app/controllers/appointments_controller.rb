@@ -5,15 +5,16 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    @appointment = Appointment.new(appointment_params)
+    request = AppointmentRequest.new(appointment_params)
 
     respond_to do |format|
-      if @appointment.save
-        format.html { redirect_to @appointment, notice: "Appointment was successfully created." }
-        format.json { render :show, status: :created, location: @appointment }
+      appointment = request.save
+
+      if appointment
+        format.html { redirect_to appointment, notice: "Appointment was successfully created." }
+        format.json { render :show, status: :created, location: appointment }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+        format.json { render json: appointment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -28,6 +29,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.expect(appointment: [ :barber_id, :service_id, :customer_name, :start_time, :end_time, :status ])
+    params.expect(appointment_request: [:barber_id, :service_id, :customer_name, :start_at, :end_at])
   end
 end

@@ -1,0 +1,11 @@
+<div class="col-12 col-md-6 col-lg-4">
+  <div class="card h-100 bg-<%= available ? "success" : "danger" %>">
+    <div class="card-body">
+      <h5 class="card-title"><%= day %></h5>
+
+      <% if available %>
+        <%= link_to "Slots", bookable_slots_by_day_barber_path(day:, service_id:), class: "btn btn-light", data: { turbo: false } %>
+      <% end %>
+    </div>
+  </div>
+</div>

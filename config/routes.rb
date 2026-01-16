@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :barbers do
     member do
-      get :available_days
-      get "available_slots/:date", to: "barbers#available_slots", as: :available_slots_by_date
+      get :bookable_days
+      get "bookable_slots/:day", to: "barbers#bookable_slots", as: :bookable_slots_by_day
       get :edit_weekly_schedule
       patch :update_weekly_schedule
     end
