@@ -1,5 +1,5 @@
 class BarbersController < ApplicationController
-  before_action :set_barber, only: %i[show edit update destroy edit_weekly_schedule update_weekly_schedule]
+  before_action :set_barber, only: %i[show edit update destroy edit_weekly_schedule update_weekly_schedule available_days available_slots]
 
   def index
     @barbers = Barber.all
@@ -64,6 +64,14 @@ class BarbersController < ApplicationController
         format.json { render json: @barber.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def available_days
+    @period = Period.from_param(params[:period])
+    @available_days = @barber.available_days(period: @period)
+  end
+
+  def available_slots
   end
 
   private

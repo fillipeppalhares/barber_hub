@@ -7,6 +7,14 @@ class Barber < ApplicationRecord
 
   after_create_commit :build_weekly_schedule
 
+  def available_days(period: Period.current_month)
+    AvailableDays.call(barber: self, period:)
+  end
+
+  def available_slots(day:)
+    AvailableSlots.call(barber: self, day:)
+  end
+
   private
 
   def build_weekly_schedule

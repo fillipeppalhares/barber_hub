@@ -1,0 +1,13 @@
+<div class="row g-3">
+  <% @period.range.each do |day| %>
+    <% available = @available_days.include?(day) %>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 bg-<%= available ? "success" : "danger" %>">
+        <div class="card-body">
+          <%= day %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

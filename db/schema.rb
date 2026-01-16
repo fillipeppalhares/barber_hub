@@ -18,8 +18,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_13_152306) do
     t.bigint "barber_id", null: false
     t.bigint "service_id", null: false
     t.string "customer_name"
-    t.time "start_time"
-    t.time "end_time"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
